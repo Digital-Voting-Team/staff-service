@@ -1,0 +1,56 @@
+allOf:
+  - $ref: '#/components/schemas/StaffKey'
+  - type: object
+    required:
+      - attributes
+      - relationships
+    properties:
+      relationships:
+        type: object
+        required:
+          - person
+          - position
+          - cafe
+        properties:
+          person:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: '#/components/schemas/PersonKey'
+          position:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: '#/components/schemas/PositionKey'
+          cafe:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: '#/components/schemas/CafeKey'
+      attributes:
+        type: object
+        required:
+          - employment_date
+          - salary
+        properties:
+          employment_date:
+            type: string
+            format: time.Time
+            example: "2006-01-02T15:00:00Z"
+          salary:
+            type: float32
+            example: 4000
+          status:
+            type: string
+            format: WorkerStatus
+            default: "busy"
+            enum:
+              - "busy"
+              - "available"
+              - "vacation"

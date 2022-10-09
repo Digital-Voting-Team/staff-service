@@ -1,0 +1,25 @@
+allOf:
+  - $ref: '#/components/schemas/PositionKey'
+  - type: object
+    required:
+      - attributes
+    properties:
+      attributes:
+        type: object
+        required:
+          - name
+          - access_level
+        properties:
+          name:
+            type: string
+          access_level:
+            type: int32
+            format: AccessLevel
+            description: >-
+              Guest -> 1; Worker -> 2; Accountant -> 3; Manager -> 4; Admin -> 5.
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5

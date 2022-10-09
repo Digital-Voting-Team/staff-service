@@ -1,0 +1,18 @@
+log:
+  disable_sentry: true
+  level: "info"
+
+db:
+#  url: "postgres://postgres:postgres@db/postgres?sslmode=disable"
+# Uncomment to use locally:
+  url: "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable"
+
+listener:
+  addr: :9102
+
+cop:
+  disabled: true
+  endpoint: "http://..."
+  upstream: "http://..."
+  service_name: staff-service
+  service_port: 80
