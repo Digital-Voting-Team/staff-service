@@ -39,14 +39,14 @@ func UpdateStaff(w http.ResponseWriter, r *http.Request) {
 	relatePerson, err := helpers.PersonsQ(r).FilterByID(newStaff.PersonID).Get()
 	if err != nil {
 		helpers.Log(r).WithError(err).Error("failed to get new person")
-		ape.RenderErr(w, problems.InternalError())
+		ape.RenderErr(w, problems.NotFound())
 		return
 	}
 
 	relatePosition, err := helpers.PositionsQ(r).FilterByID(newStaff.PersonID).Get()
 	if err != nil {
 		helpers.Log(r).WithError(err).Error("failed to get position")
-		ape.RenderErr(w, problems.InternalError())
+		ape.RenderErr(w, problems.NotFound())
 		return
 	}
 
