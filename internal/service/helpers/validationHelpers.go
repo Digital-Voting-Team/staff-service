@@ -56,8 +56,10 @@ func IsValidAccessLevel(value interface{}) error {
 }
 
 func IsValidWorkerStatus(value interface{}) error {
-	if _, ok := value.(**resources.WorkerStatus); ok {
-		return nil
+	if status, ok := value.(**resources.WorkerStatus); ok {
+		if (*status).Validate(string(**status)) {
+			return nil
+		}
 	}
 	return errors.New("value is not an valid worker status")
 }
