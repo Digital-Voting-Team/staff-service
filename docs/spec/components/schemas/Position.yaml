@@ -13,7 +13,7 @@ allOf:
           name:
             type: string
           access_level:
-            type: int32
+            type: string
             format: AccessLevel
             description: >-
               Guest -> 1; Worker -> 2; Accountant -> 3; Manager -> 4; Admin -> 5.

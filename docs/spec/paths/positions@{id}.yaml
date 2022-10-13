@@ -1,16 +1,16 @@
 parameters:
   - name: id
     in: path
-    description: 'Position identifier'
+    description: Position identifier
     required: true
     schema:
-      type: int64
-
+      type: integer
+      format: int64
 get:
   tags:
     - Position
   summary: Get Position
-  description: 'Get position by id'
+  description: Get position by id
   operationId: getPosition
   responses:
     '200':
@@ -21,7 +21,6 @@ get:
             type: object
             properties:
               data:
-                type: object
                 $ref: '#/components/schemas/Position'
     '400':
       description: Invalid request
@@ -41,12 +40,11 @@ get:
         application/vnd.api+json:
           schema:
             $ref: '#/components/schemas/Errors'
-
 put:
   tags:
     - Position
   summary: Update Position
-  description: 'Update position by id'
+  description: Update position by id
   operationId: updatePosition
   requestBody:
     content:
@@ -55,7 +53,6 @@ put:
           type: object
           properties:
             data:
-              type: object
               $ref: '#/components/schemas/Position'
   responses:
     '200':
@@ -72,13 +69,11 @@ put:
         application/vnd.api+json:
           schema:
             $ref: '#/components/schemas/Errors'
-
-
 delete:
   tags:
     - Position
   summary: Delete Position
-  description: 'Delete position by id'
+  description: Delete position by id
   operationId: deletePosition
   responses:
     '204':

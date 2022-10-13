@@ -12,7 +12,6 @@ post:
             - data
           properties:
             data:
-              type: object
               $ref: '#/components/schemas/Staff'
   responses:
     '200':
@@ -23,7 +22,6 @@ post:
             type: object
             properties:
               data:
-                type: object
                 $ref: '#/components/schemas/Staff'
     '401':
       description: Staff creation is not allowed
@@ -37,8 +35,6 @@ post:
         application/vnd.api+json:
           schema:
             $ref: '#/components/schemas/Errors'
-
-
 get:
   tags:
     - Staff
@@ -64,23 +60,27 @@ get:
       in: query
       required: false
       schema:
-        type: float32
+        type: string
+        format: float32
     - name: 'filter[salary_bottom]'
       in: query
       required: false
       schema:
-        type: float32
+        type: string
+        format: float32
     - name: 'filter[position_id]'
       in: query
       required: false
       schema:
-        type: int64
+        type: string
+        format: float32
     - name: 'filter[cafe_id]'
       in: query
       required: false
       schema:
-        type: int64
-    - name: 'include'
+        type: integer
+        format: int64
+    - name: include
       in: query
       required: false
       schema:
@@ -100,22 +100,9 @@ get:
                 items:
                   $ref: '#/components/schemas/Staff'
               included:
-                person:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/Person'
-                position:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/Position'
-              links:
-                type: object
-                description: "Provides links for pagination"
-                properties:
-                  next:
-                    type: string
-                    description: "link to the next page"
-                  self:
-                    type: string
-                    description: "link to the current page"
-
+                type: array
+            items:
+              type: object
+              allOf:
+                - $ref: '#/components/schemas/Position'
+                - $ref: '#/components/schemas/Person'

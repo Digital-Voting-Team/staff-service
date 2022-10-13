@@ -4,7 +4,8 @@ parameters:
     description: 'Staff identifier'
     required: true
     schema:
-      type: int64
+      type: string
+      format: int64
 
 get:
   tags:
@@ -21,7 +22,6 @@ get:
             type: object
             properties:
               data:
-                type: object
                 $ref: '#/components/schemas/Staff'
               included:
                   type: array
@@ -60,7 +60,6 @@ put:
           type: object
           properties:
             data:
-              type: object
               $ref: '#/components/schemas/Staff'
   responses:
     '200':
@@ -71,7 +70,6 @@ put:
             type: object
             properties:
               data:
-                type: object
                 $ref: '#/components/schemas/Staff'
               included:
                 type: array

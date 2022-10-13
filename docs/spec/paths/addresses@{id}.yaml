@@ -1,16 +1,16 @@
 parameters:
   - name: id
     in: path
-    description: 'Address identifier'
+    description: Address identifier
     required: true
     schema:
-      type: int64
-
+      type: integer
+      format: int64
 get:
   tags:
     - Address
   summary: Get Address
-  description: 'Get address by id'
+  description: Get address by id
   operationId: getAddress
   responses:
     '200':
@@ -21,7 +21,6 @@ get:
             type: object
             properties:
               data:
-                type: object
                 $ref: '#/components/schemas/Address'
     '400':
       description: Invalid request
@@ -41,12 +40,11 @@ get:
         application/vnd.api+json:
           schema:
             $ref: '#/components/schemas/Errors'
-
 put:
   tags:
     - Address
   summary: Update Address
-  description: 'Update address by id'
+  description: Update address by id
   operationId: updateAddress
   requestBody:
     content:
@@ -55,7 +53,6 @@ put:
           type: object
           properties:
             data:
-              type: object
               $ref: '#/components/schemas/Address'
   responses:
     '200':
@@ -72,13 +69,11 @@ put:
         application/vnd.api+json:
           schema:
             $ref: '#/components/schemas/Errors'
-
-
 delete:
   tags:
     - Address
   summary: Delete Address
-  description: 'Delete address by id'
+  description: Delete address by id
   operationId: deleteAddress
   responses:
     '204':

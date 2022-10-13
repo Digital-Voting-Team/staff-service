@@ -1,16 +1,16 @@
 parameters:
   - name: id
     in: path
-    description: 'Person identifier'
+    description: Person identifier
     required: true
     schema:
-      type: int64
-
+      type: integer
+      format: int64
 get:
   tags:
     - Person
   summary: Get Person
-  description: 'Get person by id'
+  description: Get person by id
   operationId: getPerson
   responses:
     '200':
@@ -21,10 +21,8 @@ get:
             type: object
             properties:
               data:
-                type: object
                 $ref: '#/components/schemas/Person'
               included:
-                type: object
                 $ref: '#/components/schemas/Address'
     '400':
       description: Invalid request
@@ -44,12 +42,11 @@ get:
         application/vnd.api+json:
           schema:
             $ref: '#/components/schemas/Errors'
-
 put:
   tags:
     - Person
   summary: Update Person
-  description: 'Update person by id'
+  description: Update person by id
   operationId: updatePerson
   requestBody:
     content:
@@ -58,7 +55,6 @@ put:
           type: object
           properties:
             data:
-              type: object
               $ref: '#/components/schemas/Person'
   responses:
     '200':
@@ -69,10 +65,8 @@ put:
             type: object
             properties:
               data:
-                type: object
                 $ref: '#/components/schemas/Person'
               included:
-                type: object
                 $ref: '#/components/schemas/Address'
     '404':
       description: Invalid person id
@@ -86,13 +80,11 @@ put:
         application/vnd.api+json:
           schema:
             $ref: '#/components/schemas/Errors'
-
-
 delete:
   tags:
     - Person
   summary: Delete Person
-  description: 'Delete person by id'
+  description: Delete person by id
   operationId: deletePerson
   responses:
     '204':

@@ -44,7 +44,8 @@ allOf:
             format: time.Time
             example: "2006-01-02T15:00:00Z"
           salary:
-            type: float32
+            type: string
+            format: float32
             example: 4000
           status:
             type: string
