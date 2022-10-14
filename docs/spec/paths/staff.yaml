@@ -101,8 +101,8 @@ get:
                   $ref: '#/components/schemas/Staff'
               included:
                 type: array
-            items:
-              type: object
-              allOf:
-                - $ref: '#/components/schemas/Position'
-                - $ref: '#/components/schemas/Person'
+                items:
+                  type: object
+                  allOf:
+                    - $ref: '#/components/schemas/Position'
+                    - $ref: '#/components/schemas/Person'

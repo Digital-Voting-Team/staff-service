@@ -26,8 +26,10 @@ get:
               included:
                   type: array
                   items:
-                   - $ref: '#/components/schemas/Person'
-                   - $ref: '#/components/schemas/Position'
+                    type: object
+                    allOf:
+                      - $ref: '#/components/schemas/Person'
+                      - $ref: '#/components/schemas/Position'
     '400':
       description: Invalid request
       content:
@@ -74,8 +76,10 @@ put:
               included:
                 type: array
                 items:
-                  - $ref: '#/components/schemas/Person'
-                  - $ref: '#/components/schemas/Position'
+                  type: object
+                  allOf:
+                    - $ref: '#/components/schemas/Person'
+                    - $ref: '#/components/schemas/Position'
     '404':
       description: Invalid staff id
       content:
