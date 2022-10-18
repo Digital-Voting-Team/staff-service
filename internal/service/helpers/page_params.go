@@ -1,8 +1,8 @@
 package helpers
 
 import (
+	"github.com/Digital-Voting-Team/staff-service/resources"
 	"net/http"
-	"staff-service/resources"
 	"strconv"
 
 	"gitlab.com/distributed_lab/kit/pgdb"

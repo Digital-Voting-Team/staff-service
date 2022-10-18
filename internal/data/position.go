@@ -1,8 +1,8 @@
 package data
 
 import (
+	"github.com/Digital-Voting-Team/staff-service/resources"
 	"gitlab.com/distributed_lab/kit/pgdb"
-	"staff-service/resources"
 )
 
 type PositionsQ interface {

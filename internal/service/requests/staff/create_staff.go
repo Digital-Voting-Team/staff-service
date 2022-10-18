@@ -2,11 +2,11 @@ package requests
 
 import (
 	"encoding/json"
+	"github.com/Digital-Voting-Team/staff-service/internal/service/helpers"
+	"github.com/Digital-Voting-Team/staff-service/resources"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"net/http"
-	"staff-service/internal/service/helpers"
-	"staff-service/resources"
 )
 
 type CreateStaffRequest struct {

@@ -1,9 +1,9 @@
 package handlers
 
 import (
+	"github.com/Digital-Voting-Team/staff-service/internal/service/helpers"
+	requests "github.com/Digital-Voting-Team/staff-service/internal/service/requests/address"
 	"net/http"
-	"staff-service/internal/service/helpers"
-	requests "staff-service/internal/service/requests/address"
 
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"

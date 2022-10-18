@@ -1,12 +1,12 @@
 package handlers
 
 import (
+	"github.com/Digital-Voting-Team/staff-service/internal/data"
+	"github.com/Digital-Voting-Team/staff-service/internal/service/helpers"
+	requests "github.com/Digital-Voting-Team/staff-service/internal/service/requests/staff"
+	"github.com/Digital-Voting-Team/staff-service/resources"
 	"github.com/spf13/cast"
 	"net/http"
-	"staff-service/internal/data"
-	"staff-service/internal/service/helpers"
-	requests "staff-service/internal/service/requests/staff"
-	"staff-service/resources"
 	"strconv"
 
 	"gitlab.com/distributed_lab/ape"

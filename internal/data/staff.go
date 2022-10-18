@@ -1,9 +1,10 @@
 package data
 
 import (
-	"gitlab.com/distributed_lab/kit/pgdb"
-	"staff-service/resources"
 	"time"
+
+	"github.com/Digital-Voting-Team/staff-service/resources"
+	"gitlab.com/distributed_lab/kit/pgdb"
 )
 
 type StaffQ interface {

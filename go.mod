@@ -1,4 +1,4 @@
-module staff-service
+module github.com/Digital-Voting-Team/staff-service
 
 go 1.19
 

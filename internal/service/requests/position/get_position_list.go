@@ -1,8 +1,8 @@
 package requests
 
 import (
+	"github.com/Digital-Voting-Team/staff-service/resources"
 	"net/http"
-	"staff-service/resources"
 
 	"gitlab.com/distributed_lab/kit/pgdb"
 	"gitlab.com/distributed_lab/urlval"

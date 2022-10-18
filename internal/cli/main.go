@@ -1,8 +1,8 @@
 package cli
 
 import (
-	"staff-service/internal/config"
-	"staff-service/internal/service"
+	"github.com/Digital-Voting-Team/staff-service/internal/config"
+	"github.com/Digital-Voting-Team/staff-service/internal/service"
 
 	"github.com/alecthomas/kingpin"
 	"gitlab.com/distributed_lab/kit/kv"

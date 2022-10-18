@@ -2,9 +2,9 @@ package pg
 
 import (
 	"database/sql"
+	"github.com/Digital-Voting-Team/staff-service/internal/data"
+	"github.com/Digital-Voting-Team/staff-service/resources"
 	"gitlab.com/distributed_lab/kit/pgdb"
-	"staff-service/internal/data"
-	"staff-service/resources"
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/fatih/structs"

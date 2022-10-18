@@ -1,12 +1,12 @@
 package service
 
 import (
-	"staff-service/internal/data/pg"
-	address "staff-service/internal/service/handlers/address"
-	person "staff-service/internal/service/handlers/person"
-	position "staff-service/internal/service/handlers/position"
-	staff "staff-service/internal/service/handlers/staff"
-	"staff-service/internal/service/helpers"
+	"github.com/Digital-Voting-Team/staff-service/internal/data/pg"
+	address "github.com/Digital-Voting-Team/staff-service/internal/service/handlers/address"
+	person "github.com/Digital-Voting-Team/staff-service/internal/service/handlers/person"
+	position "github.com/Digital-Voting-Team/staff-service/internal/service/handlers/position"
+	staff "github.com/Digital-Voting-Team/staff-service/internal/service/handlers/staff"
+	"github.com/Digital-Voting-Team/staff-service/internal/service/helpers"
 
 	"github.com/go-chi/chi"
 	"gitlab.com/distributed_lab/ape"
