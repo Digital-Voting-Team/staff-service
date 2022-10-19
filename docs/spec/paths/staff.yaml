@@ -87,6 +87,7 @@ get:
         type: string
         enum:
           - persons
+          - positions
   responses:
     '200':
       description: Success
