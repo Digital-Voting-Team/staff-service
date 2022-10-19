@@ -11,6 +11,7 @@ allOf:
           - person
           - position
           - cafe
+          - user
         properties:
           person:
             type: object
@@ -33,6 +34,13 @@ allOf:
             properties:
               data:
                 $ref: '#/components/schemas/CafeKey'
+          user:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: '#/components/schemas/UserKey'
       attributes:
         type: object
         required:

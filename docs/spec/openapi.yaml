@@ -6,3 +6,5 @@ info:
 servers:
   - url: 'https://service-template.com/'
     description: Service Template
+security:
+  - bearerAuth: []
