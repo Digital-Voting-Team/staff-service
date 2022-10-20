@@ -49,5 +49,7 @@ func (r *UpdateStaffRequest) validate() error {
 			validation.Required, validation.By(helpers.IsInteger)),
 		"/data/relationships/person/position/id": validation.Validate(&r.Data.Relationships.Position.Data.ID,
 			validation.Required, validation.By(helpers.IsInteger)),
+		"/data/relationships/person/user/id": validation.Validate(&r.Data.Relationships.User.Data.ID,
+			validation.Required, validation.By(helpers.IsInteger)),
 	}).Filter()
 }
