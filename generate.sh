@@ -3,8 +3,8 @@
 GENERATOR_IMAGE=registry.gitlab.com/tokend/openapi-go-generator:69f004b58152c83f007b593cc13e94b81d7200da
 
 
-GENERATED="${GOPATH}/src/staff-service/resources"
-OPENAPI_DIR="${GOPATH}/src/staff-service/docs/web_deploy"
+GENERATED="/home/internos/Desktop/CSCA/staff-service/resources"
+OPENAPI_DIR="/home/internos/Desktop/CSCA/staff-service/docs/web_deploy"
 PACKAGE_NAME=resources
 
 function printHelp {

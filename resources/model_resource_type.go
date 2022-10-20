@@ -13,4 +13,5 @@ const (
 	PERSON   ResourceType = "person"
 	POSITION ResourceType = "position"
 	STAFF    ResourceType = "staff"
+	USER_REF ResourceType = "user_ref"
 )

@@ -13,8 +13,8 @@ type PositionsQ interface {
 
 	Transaction(fn func(q PositionsQ) error) error
 
-	Insert(address Position) (Position, error)
-	Update(address Position) (Position, error)
+	Insert(Position) (Position, error)
+	Update(Position) (Position, error)
 	Delete(id int64) error
 
 	Page(pageParams pgdb.OffsetPageParams) PositionsQ

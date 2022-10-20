@@ -15,8 +15,8 @@ type StaffQ interface {
 
 	Transaction(fn func(q StaffQ) error) error
 
-	Insert(customer Staff) (Staff, error)
-	Update(customer Staff) (Staff, error)
+	Insert(Staff) (Staff, error)
+	Update(Staff) (Staff, error)
 	Delete(id int64) error
 
 	Page(pageParams pgdb.OffsetPageParams) StaffQ
