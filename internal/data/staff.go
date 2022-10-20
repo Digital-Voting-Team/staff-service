@@ -41,4 +41,5 @@ type Staff struct {
 	PersonID       int64                  `db:"person_id" structs:"person_id"`
 	CafeID         int64                  `db:"cafe_id" structs:"cafe_id"`
 	PositionID     int64                  `db:"position_id" structs:"position_id"`
+	UserId         int64                  `db:"user_id" structs:"user_id"`
 }

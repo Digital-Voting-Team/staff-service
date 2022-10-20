@@ -34,6 +34,7 @@ func UpdateStaff(w http.ResponseWriter, r *http.Request) {
 		PersonID:       cast.ToInt64(request.Data.Relationships.Person.Data.ID),
 		CafeID:         cast.ToInt64(request.Data.Relationships.Cafe.Data.ID),
 		PositionID:     cast.ToInt64(request.Data.Relationships.Position.Data.ID),
+		UserId:         cast.ToInt64(request.Data.Relationships.User.Data.ID),
 	}
 
 	relatePerson, err := helpers.PersonsQ(r).FilterByID(newStaff.PersonID).Get()

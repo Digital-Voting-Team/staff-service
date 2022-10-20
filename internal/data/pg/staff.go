@@ -60,6 +60,7 @@ func (s *staffQ) Insert(staff data.Staff) (data.Staff, error) {
 	clauses["person_id"] = staff.PersonID
 	clauses["cafe_id"] = staff.CafeID
 	clauses["position_id"] = staff.PositionID
+	clauses["user_id"] = staff.PositionID
 
 	var result data.Staff
 	stmt := sq.Insert(staffTableName).SetMap(clauses).Suffix("returning *")
@@ -77,6 +78,7 @@ func (s *staffQ) Update(staff data.Staff) (data.Staff, error) {
 	clauses["person_id"] = staff.PersonID
 	clauses["cafe_id"] = staff.CafeID
 	clauses["position_id"] = staff.PositionID
+	clauses["user_id"] = staff.PositionID
 
 	err := s.db.Get(&result, s.sqlUpdate.SetMap(clauses))
 	return result, err
