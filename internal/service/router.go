@@ -7,6 +7,7 @@ import (
 	position "github.com/Digital-Voting-Team/staff-service/internal/service/handlers/position"
 	staff "github.com/Digital-Voting-Team/staff-service/internal/service/handlers/staff"
 	"github.com/Digital-Voting-Team/staff-service/internal/service/helpers"
+	"github.com/Digital-Voting-Team/staff-service/internal/service/middleware"
 
 	"github.com/go-chi/chi"
 	"gitlab.com/distributed_lab/ape"
@@ -30,6 +31,7 @@ func (s *service) router() chi.Router {
 		),
 	)
 	r.Route("/integrations/staff-service", func(r chi.Router) {
+		r.Use(middleware.BasicAuth())
 		r.Route("/addresses", func(r chi.Router) {
 			r.Post("/", address.CreateAddress)
 			r.Get("/", address.GetAddressList)

@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS public.staff
     person_id integer,
     cafe_id integer,
     position_id integer,
-    user_id integer,
+    user_id integer UNIQUE,
     CONSTRAINT staff_id PRIMARY KEY (id),
     CONSTRAINT person_id FOREIGN KEY (person_id)
         REFERENCES public.person (id) MATCH SIMPLE
@@ -98,8 +98,6 @@ ALTER TABLE IF EXISTS public.staff
 INSERT INTO public.staff(
     employment_date, salary, status, person_id, cafe_id, position_id, user_id)
 VALUES ('1996-12-02', 100, 'BUSY', 1, 1, 1, 1);
-
-
 
 
 -- +migrate Down
