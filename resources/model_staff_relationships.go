@@ -8,4 +8,5 @@ type StaffRelationships struct {
 	Cafe     Relation `json:"cafe"`
 	Person   Relation `json:"person"`
 	Position Relation `json:"position"`
+	User     Relation `json:"user"`
 }
