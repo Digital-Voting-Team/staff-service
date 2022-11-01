@@ -10,9 +10,14 @@ db:
 listener:
   addr: :9102
 
+endpoints:
+  docker: true
+  services:
+    - service: "auth_service"
+      entry_points:
+        - "localhost:9110/jwt/login"
+        - "auth_service:9110/jwt/login"
+
+
 cop:
   disabled: true
-  endpoint: "http://..."
-  upstream: "http://..."
-  service_name: staff-service
-  service_port: 80

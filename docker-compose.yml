@@ -10,10 +10,9 @@ services:
       - staff_db
     environment:
       - KV_VIPER_FILE=/config.yaml
-      - AUTH_SERVICE=http://127.0.0.1:9110/jwt/login
     volumes:
       - ./config.yaml:/config.yaml
-    command: run service
+    entrypoint: sh -c "staff-service migrate up && staff-service run service"
 
   staff_db:
     image: postgres

@@ -9,7 +9,7 @@ services:
 - docker
 env:
   global:
-  - PROJECT: tokend
+  - PROJECT: kyrylrs
   - IMAGE_NAME: staff-service
 
 

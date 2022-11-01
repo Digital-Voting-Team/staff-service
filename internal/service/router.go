@@ -31,7 +31,7 @@ func (s *service) router() chi.Router {
 		),
 	)
 	r.Route("/integrations/staff-service", func(r chi.Router) {
-		r.Use(middleware.BasicAuth())
+		r.Use(middleware.BasicAuth(s.endpoints))
 		r.Route("/addresses", func(r chi.Router) {
 			r.Post("/", address.CreateAddress)
 			r.Get("/", address.GetAddressList)
