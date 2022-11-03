@@ -10,8 +10,9 @@ db:
 listener:
   addr: :9102
 
+# if docker false, the first entry point will be used, otherwise the second!!!
 endpoints:
-  docker: true
+  docker: false
   services:
     - service: "auth_service"
       entry_points:

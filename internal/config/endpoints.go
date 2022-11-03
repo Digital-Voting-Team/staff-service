@@ -1,7 +1,7 @@
 package config
 
 import (
-	"fmt"
+	"gitlab.com/distributed_lab/figure/v3"
 	"gitlab.com/distributed_lab/kit/comfig"
 	"gitlab.com/distributed_lab/kit/kv"
 	"gitlab.com/distributed_lab/logan/v3/errors"
@@ -39,37 +39,26 @@ type endpointsConfig struct {
 func (c *endpointsConfig) EndpointsConfig() *EndpointsConfig {
 	return c.once.Do(func() interface{} {
 		raw := kv.MustGetStringMap(c.getter, "Endpoints")
-		config, err := parseRawEndpointsConfig(raw)
+		config := RawEndpointsConfig{}
+		err := figure.Out(&config).From(raw).Please()
 		if err != nil {
 			panic(errors.Wrap(err, "failed to figure out"))
 		}
-		return &config
+		resConf := parseRawEndpointsConfig(config)
+		return &resConf
 	}).(*EndpointsConfig)
 }
 
-func parseRawEndpointsConfig(raw map[string]interface{}) (EndpointsConfig, error) {
-	services := raw["services"]
-	docker := raw["docker"].(bool)
+func parseRawEndpointsConfig(raw RawEndpointsConfig) EndpointsConfig {
 	resConf := EndpointsConfig{}
 	resConf.Endpoints = make(map[string]string)
-	for _, service := range services.([]interface{}) {
-		mapService := service.(map[interface{}]interface{})
-		serviceName := mapService["service"].(string)
-		serviceEntries := parseEntryPoints(mapService["entry_points"].([]interface{}))
-		if docker {
-			resConf.Endpoints[serviceName] = fmt.Sprintf("http://%v", serviceEntries[1])
+	for _, endpoint := range raw.Endpoints {
+		if raw.Docker {
+			resConf.Endpoints[endpoint.Endpoint] = "http://" + endpoint.EntryPoints[1]
 		} else {
-			resConf.Endpoints[serviceName] = fmt.Sprintf("http://%v", serviceEntries[0])
+			resConf.Endpoints[endpoint.Endpoint] = "http://" + endpoint.EntryPoints[0]
 		}
 	}
 
-	return resConf, nil
-}
-
-func parseEntryPoints(entryPoints []interface{}) []string {
-	s := make([]string, len(entryPoints))
-	for i, v := range entryPoints {
-		s[i] = fmt.Sprint(v)
-	}
-	return s
+	return resConf
 }
