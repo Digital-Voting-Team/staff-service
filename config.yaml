@@ -12,7 +12,7 @@ listener:
 
 # if docker false, the first entry point will be used, otherwise the second!!!
 endpoints:
-  docker: false
+  docker: true
   services:
     - service: "auth_service"
       entry_points:
