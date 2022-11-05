@@ -35,7 +35,7 @@ func BasicAuth(endpointsConf *config.EndpointsConfig) func(next http.Handler) ht
 				ape.Render(w, problems.BadRequest(err))
 				return
 			}
-			if err != nil || jwtResponse.Data.ID == "" {
+			if err != nil || position.ID == 0 {
 				helpers.Log(r).WithError(err).Info("auth failed, no staff to user")
 				ape.Render(w, problems.Forbidden())
 				return

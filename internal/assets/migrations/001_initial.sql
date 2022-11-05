@@ -100,6 +100,11 @@ INSERT INTO public.staff(
 VALUES ('1996-12-02', 100, 'BUSY', 1, 1, 1, 1);
 
 
+SELECT * FROM public.address;
+SELECT * FROM public.person;
+SELECT * FROM public.position;
+SELECT * FROM public.staff;
+
 -- +migrate Down
 DROP TABLE IF EXISTS public.staff;
 DROP TABLE IF EXISTS public.position;
