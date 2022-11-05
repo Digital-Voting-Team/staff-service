@@ -44,6 +44,13 @@ func CreatePerson(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	resultPersonByAddress, err := helpers.PersonsQ(r).FilterByAddressID(person.AddressID).Get()
+	if resultPersonByAddress != nil {
+		helpers.Log(r).WithError(err).Error("address already related to staff")
+		ape.RenderErr(w, problems.Conflict())
+		return
+	}
+
 	resultPerson, err = helpers.PersonsQ(r).Insert(person)
 	if err != nil {
 		helpers.Log(r).WithError(err).Error("failed to create person")

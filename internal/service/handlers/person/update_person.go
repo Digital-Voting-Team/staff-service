@@ -56,6 +56,13 @@ func UpdatePerson(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	resultPersonByAddress, err := helpers.PersonsQ(r).FilterByAddressID(person.AddressID).Get()
+	if resultPersonByAddress.ID == 0 || resultPersonByAddress.AddressID != newPerson.AddressID {
+		helpers.Log(r).WithError(err).Error("invalid address to update")
+		ape.RenderErr(w, problems.Conflict())
+		return
+	}
+
 	var resultPerson data.Person
 	resultPerson, err = helpers.PersonsQ(r).FilterByID(person.ID).Update(newPerson)
 	if err != nil {
