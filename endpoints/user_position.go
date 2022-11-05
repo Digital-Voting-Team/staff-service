@@ -21,11 +21,12 @@ func ParsePositionResponse(r *http.Response) (*resources.PositionResponse, error
 	return &response, nil
 }
 
-func ValidatePosition(endpoint string) (*resources.PositionResponse, error) {
+func GetPosition(token, endpoint string) (*resources.PositionResponse, error) {
 	req, err := http.NewRequest("GET", endpoint, nil)
 	if err != nil {
 		return nil, err
 	}
+	req.Header.Set("Authorization", token)
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return nil, err
