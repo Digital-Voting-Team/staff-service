@@ -3,6 +3,7 @@ package handlers
 import (
 	"github.com/Digital-Voting-Team/staff-service/internal/service/helpers"
 	requests "github.com/Digital-Voting-Team/staff-service/internal/service/requests/staff"
+	"github.com/Digital-Voting-Team/staff-service/resources"
 	"net/http"
 
 	"gitlab.com/distributed_lab/ape"
@@ -10,6 +11,13 @@ import (
 )
 
 func DeleteStaff(w http.ResponseWriter, r *http.Request) {
+	accessLevel := r.Context().Value("accessLevel").(resources.AccessLevel)
+	if accessLevel < resources.Manager {
+		helpers.Log(r).Info("insufficient user permissions")
+		ape.RenderErr(w, problems.Forbidden())
+		return
+	}
+
 	request, err := requests.NewDeleteStaffRequest(r)
 	if err != nil {
 		helpers.Log(r).WithError(err).Info("wrong request")

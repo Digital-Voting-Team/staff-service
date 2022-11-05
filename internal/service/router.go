@@ -6,6 +6,7 @@ import (
 	person "github.com/Digital-Voting-Team/staff-service/internal/service/handlers/person"
 	position "github.com/Digital-Voting-Team/staff-service/internal/service/handlers/position"
 	staff "github.com/Digital-Voting-Team/staff-service/internal/service/handlers/staff"
+	"github.com/Digital-Voting-Team/staff-service/internal/service/handlers/user"
 	"github.com/Digital-Voting-Team/staff-service/internal/service/helpers"
 	"github.com/Digital-Voting-Team/staff-service/internal/service/middleware"
 
@@ -53,6 +54,8 @@ func (s *service) router() chi.Router {
 		r.Route("/positions", func(r chi.Router) {
 			r.Post("/", position.CreatePosition)
 			r.Get("/", position.GetPositionList)
+			r.Get("/user/position", user.GetPositionByUserHandler)
+			r.Get("/jwt/user/position", user.GetPositionByJWT(s.endpoints))
 			r.Route("/{id}", func(r chi.Router) {
 				r.Get("/", position.GetPosition)
 				r.Put("/", position.UpdatePosition)

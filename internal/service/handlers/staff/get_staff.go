@@ -12,6 +12,13 @@ import (
 )
 
 func GetStaff(w http.ResponseWriter, r *http.Request) {
+	accessLevel := r.Context().Value("accessLevel").(resources.AccessLevel)
+	if accessLevel < resources.Manager {
+		helpers.Log(r).Info("insufficient user permissions")
+		ape.RenderErr(w, problems.Forbidden())
+		return
+	}
+
 	request, err := requests.NewGetStaffRequest(r)
 	if err != nil {
 		helpers.Log(r).WithError(err).Info("wrong request")
@@ -96,6 +103,12 @@ func GetStaff(w http.ResponseWriter, r *http.Request) {
 					Data: &resources.Key{
 						ID:   strconv.FormatInt(resultStaff.CafeID, 10),
 						Type: resources.CAFE_REF,
+					},
+				},
+				User: resources.Relation{
+					Data: &resources.Key{
+						ID:   strconv.FormatInt(resultStaff.UserId, 10),
+						Type: resources.USER_REF,
 					},
 				},
 			},

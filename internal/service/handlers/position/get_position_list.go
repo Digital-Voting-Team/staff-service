@@ -12,6 +12,13 @@ import (
 )
 
 func GetPositionList(w http.ResponseWriter, r *http.Request) {
+	accessLevel := r.Context().Value("accessLevel").(resources.AccessLevel)
+	if accessLevel < resources.Manager {
+		helpers.Log(r).Info("insufficient user permissions")
+		ape.RenderErr(w, problems.Forbidden())
+		return
+	}
+
 	request, err := requests.NewGetPositionListRequest(r)
 	if err != nil {
 		ape.RenderErr(w, problems.BadRequest(err)...)

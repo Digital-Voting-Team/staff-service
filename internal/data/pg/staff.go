@@ -101,6 +101,12 @@ func (s *staffQ) FilterByID(ids ...int64) data.StaffQ {
 	return s
 }
 
+func (s *staffQ) FilterByUserID(ids ...int64) data.StaffQ {
+	s.sql = s.sql.Where(sq.Eq{"user_id": ids})
+	s.sqlUpdate = s.sqlUpdate.Where(sq.Eq{"user_id": ids})
+	return s
+}
+
 func (s *staffQ) FilterByWorkStart(time time.Time) data.StaffQ {
 	stmt := sq.GtOrEq{"staff.employment_date": time}
 	s.sql = s.sql.Where(stmt)

@@ -21,9 +21,23 @@ func UpdateStaff(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	customer, err := helpers.StaffQ(r).FilterByID(request.StaffID).Get()
-	if customer == nil {
+	staff, err := helpers.StaffQ(r).FilterByID(request.StaffID).Get()
+	if staff == nil {
 		ape.Render(w, problems.NotFound())
+		return
+	}
+
+	userId := r.Context().Value("userId").(int64)
+	accessLevel := r.Context().Value("accessLevel").(resources.AccessLevel)
+	staffId, _, _, err := helpers.GetIdsForGivenUser(r, userId)
+	if err != nil {
+		helpers.Log(r).WithError(err).Info("wrong relations")
+		ape.RenderErr(w, problems.InternalError())
+		return
+	}
+	if accessLevel != resources.Admin && staffId != staff.ID {
+		helpers.Log(r).Info("insufficient user permissions")
+		ape.RenderErr(w, problems.Forbidden())
 		return
 	}
 
@@ -52,7 +66,7 @@ func UpdateStaff(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var resultStaff data.Staff
-	resultStaff, err = helpers.StaffQ(r).FilterByID(customer.ID).Update(newStaff)
+	resultStaff, err = helpers.StaffQ(r).FilterByID(staff.ID).Update(newStaff)
 	if err != nil {
 		helpers.Log(r).WithError(err).Error("failed to update staff")
 		ape.RenderErr(w, problems.InternalError())
@@ -111,6 +125,12 @@ func UpdateStaff(w http.ResponseWriter, r *http.Request) {
 					Data: &resources.Key{
 						ID:   strconv.FormatInt(resultStaff.CafeID, 10),
 						Type: resources.CAFE_REF,
+					},
+				},
+				User: resources.Relation{
+					Data: &resources.Key{
+						ID:   strconv.FormatInt(resultStaff.UserId, 10),
+						Type: resources.USER_REF,
 					},
 				},
 			},

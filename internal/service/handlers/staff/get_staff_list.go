@@ -13,6 +13,13 @@ import (
 )
 
 func GetStaffList(w http.ResponseWriter, r *http.Request) {
+	accessLevel := r.Context().Value("accessLevel").(resources.AccessLevel)
+	if accessLevel < resources.Manager {
+		helpers.Log(r).Info("insufficient user permissions")
+		ape.RenderErr(w, problems.Forbidden())
+		return
+	}
+
 	request, err := requests.NewGetStaffListRequest(r)
 	if err != nil {
 		ape.RenderErr(w, problems.BadRequest(err)...)
@@ -93,6 +100,12 @@ func newStaffList(staff []data.Staff) []resources.Staff {
 					Data: &resources.Key{
 						ID:   strconv.FormatInt(staff_.CafeID, 10),
 						Type: resources.CAFE_REF,
+					},
+				},
+				User: resources.Relation{
+					Data: &resources.Key{
+						ID:   strconv.FormatInt(staff_.UserId, 10),
+						Type: resources.USER_REF,
 					},
 				},
 			},

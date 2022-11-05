@@ -12,6 +12,13 @@ import (
 )
 
 func GetPerson(w http.ResponseWriter, r *http.Request) {
+	accessLevel := r.Context().Value("accessLevel").(resources.AccessLevel)
+	if accessLevel < resources.Manager {
+		helpers.Log(r).Info("insufficient user permissions")
+		ape.RenderErr(w, problems.Forbidden())
+		return
+	}
+
 	request, err := requests.NewGetPersonRequest(r)
 	if err != nil {
 		helpers.Log(r).WithError(err).Info("wrong request")

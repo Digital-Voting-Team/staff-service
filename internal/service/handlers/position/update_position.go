@@ -12,6 +12,13 @@ import (
 )
 
 func UpdatePosition(w http.ResponseWriter, r *http.Request) {
+	accessLevel := r.Context().Value("accessLevel").(resources.AccessLevel)
+	if accessLevel < resources.Manager {
+		helpers.Log(r).Info("insufficient user permissions")
+		ape.RenderErr(w, problems.Forbidden())
+		return
+	}
+
 	request, err := requests.NewUpdatePositionRequest(r)
 	if err != nil {
 		helpers.Log(r).WithError(err).Info("wrong request")

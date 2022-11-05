@@ -7,8 +7,8 @@ type AccessLevel int64
 const (
 	Guest AccessLevel = iota + 1
 	Worker
-	Accountant
 	Manager
+	Accountant
 	Admin
 )
 
