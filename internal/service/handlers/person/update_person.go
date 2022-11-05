@@ -28,14 +28,14 @@ func UpdatePerson(w http.ResponseWriter, r *http.Request) {
 	}
 
 	userId := r.Context().Value("userId").(int64)
-	accessLevel := r.Context().Value("accessLevel").(resources.AccessLevel)
+	accessLevel := r.Context().Value("accessLevel").(*resources.AccessLevel)
 	_, personId, _, err := helpers.GetIdsForGivenUser(r, userId)
 	if err != nil {
 		helpers.Log(r).WithError(err).Info("wrong relations")
 		ape.RenderErr(w, problems.InternalError())
 		return
 	}
-	if accessLevel != resources.Admin && personId != person.ID {
+	if *accessLevel != resources.Admin && personId != person.ID {
 		helpers.Log(r).Info("insufficient user permissions")
 		ape.RenderErr(w, problems.Forbidden())
 		return

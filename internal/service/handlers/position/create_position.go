@@ -12,8 +12,8 @@ import (
 )
 
 func CreatePosition(w http.ResponseWriter, r *http.Request) {
-	accessLevel := r.Context().Value("accessLevel").(resources.AccessLevel)
-	if accessLevel < resources.Manager {
+	accessLevel := r.Context().Value("accessLevel").(*resources.AccessLevel)
+	if *accessLevel < resources.Admin {
 		helpers.Log(r).Info("insufficient user permissions")
 		ape.RenderErr(w, problems.Forbidden())
 		return

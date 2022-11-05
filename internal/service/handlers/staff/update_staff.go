@@ -28,14 +28,14 @@ func UpdateStaff(w http.ResponseWriter, r *http.Request) {
 	}
 
 	userId := r.Context().Value("userId").(int64)
-	accessLevel := r.Context().Value("accessLevel").(resources.AccessLevel)
+	accessLevel := r.Context().Value("accessLevel").(*resources.AccessLevel)
 	staffId, _, _, err := helpers.GetIdsForGivenUser(r, userId)
 	if err != nil {
 		helpers.Log(r).WithError(err).Info("wrong relations")
 		ape.RenderErr(w, problems.InternalError())
 		return
 	}
-	if accessLevel != resources.Admin && staffId != staff.ID {
+	if *accessLevel != resources.Admin && staffId != staff.ID {
 		helpers.Log(r).Info("insufficient user permissions")
 		ape.RenderErr(w, problems.Forbidden())
 		return
@@ -62,6 +62,24 @@ func UpdateStaff(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		helpers.Log(r).WithError(err).Error("failed to get position")
 		ape.RenderErr(w, problems.NotFound())
+		return
+	}
+
+	if staff.UserId != newStaff.UserId {
+		helpers.Log(r).WithError(err).Error("cannot change staff to user relation")
+		ape.RenderErr(w, problems.Conflict())
+		return
+	}
+
+	resultStaffByUser, err := helpers.StaffQ(r).FilterByUserID(staff.UserId).Get()
+	if resultStaffByUser == nil {
+		helpers.Log(r).WithError(err).Error("user not assigned to staff")
+		ape.RenderErr(w, problems.Conflict())
+		return
+	}
+	if resultStaffByUser.ID == 0 || resultStaffByUser.UserId != newStaff.UserId {
+		helpers.Log(r).WithError(err).Error("invalid user to update")
+		ape.RenderErr(w, problems.Conflict())
 		return
 	}
 

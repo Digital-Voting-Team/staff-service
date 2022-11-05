@@ -11,8 +11,8 @@ import (
 )
 
 func DeleteAddress(w http.ResponseWriter, r *http.Request) {
-	accessLevel := r.Context().Value("accessLevel").(resources.AccessLevel)
-	if accessLevel < resources.Manager {
+	accessLevel := r.Context().Value("accessLevel").(*resources.AccessLevel)
+	if *accessLevel < resources.Manager {
 		helpers.Log(r).Info("insufficient user permissions")
 		ape.RenderErr(w, problems.Forbidden())
 		return

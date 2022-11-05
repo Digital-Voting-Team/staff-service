@@ -14,8 +14,8 @@ import (
 )
 
 func CreateStaff(w http.ResponseWriter, r *http.Request) {
-	accessLevel := r.Context().Value("accessLevel").(resources.AccessLevel)
-	if accessLevel < resources.Manager {
+	accessLevel := r.Context().Value("accessLevel").(*resources.AccessLevel)
+	if *accessLevel < resources.Manager {
 		helpers.Log(r).Info("insufficient user permissions")
 		ape.RenderErr(w, problems.Forbidden())
 		return
@@ -49,6 +49,13 @@ func CreateStaff(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		helpers.Log(r).WithError(err).Error("failed to get position")
 		ape.RenderErr(w, problems.NotFound())
+		return
+	}
+
+	resultStaffByUser, err := helpers.StaffQ(r).FilterByUserID(staff.UserId).Get()
+	if resultStaffByUser != nil {
+		helpers.Log(r).WithError(err).Error("user already related to staff")
+		ape.RenderErr(w, problems.Conflict())
 		return
 	}
 
