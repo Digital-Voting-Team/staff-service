@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"context"
+	"fmt"
 	"github.com/Digital-Voting-Team/auth-serivce/endpoints"
 	"github.com/Digital-Voting-Team/staff-service/internal/config"
 	"github.com/Digital-Voting-Team/staff-service/internal/service/handlers/user"
@@ -15,6 +16,7 @@ import (
 func BasicAuth(endpointsConf *config.EndpointsConfig) func(next http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			fmt.Println(endpointsConf.Endpoints["auth-service"])
 			jwtResponse, err := endpoints.ValidateToken(
 				r.Header.Get("Authorization"),
 				endpointsConf.Endpoints["auth-service"],
