@@ -20,7 +20,7 @@ func BasicAuth(endpointsConf *config.EndpointsConfig) func(next http.Handler) ht
 				endpointsConf.Endpoints["auth-service"],
 			)
 			if jwtResponse == nil {
-				helpers.Log(r).WithError(err).Info("auth failed, jwtResponse == nil")
+				helpers.Log(r).WithError(err).Info("auth failed, jwtResponse == nil", endpointsConf.Endpoints["auth-service"])
 				ape.Render(w, problems.BadRequest(err))
 				return
 			}
