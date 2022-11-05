@@ -14,10 +14,10 @@ listener:
 endpoints:
   docker: true
   services:
-    - service: "auth_service"
+    - service: "auth-service"
       entry_points:
         - "localhost:9110/jwt/login"
-        - "auth_service:9110/jwt/login"
+        - "auth-service:9110/jwt/login"
 
 
 cop:
