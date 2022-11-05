@@ -17,14 +17,24 @@ func BasicAuth(endpointsConf *config.EndpointsConfig) func(next http.Handler) ht
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			jwtResponse, err := endpoints.ValidateToken(
 				r.Header.Get("Authorization"),
-				endpointsConf.Endpoints["auth_service"],
+				endpointsConf.Endpoints["auth-service"],
 			)
+			if jwtResponse == nil {
+				helpers.Log(r).WithError(err).Info("auth failed, jwtResponse == nil")
+				ape.Render(w, problems.BadRequest(err))
+				return
+			}
 			if err != nil || jwtResponse.Data.ID == "" {
 				helpers.Log(r).WithError(err).Info("auth failed")
 				ape.Render(w, problems.BadRequest(err))
 				return
 			}
 			position, err := user.GetPositionByUser(r, cast.ToInt64(jwtResponse.Data.Relationships.User.Data.ID))
+			if position == nil {
+				helpers.Log(r).WithError(err).Info("auth failed, position == nil")
+				ape.Render(w, problems.BadRequest(err))
+				return
+			}
 			if err != nil || jwtResponse.Data.ID == "" {
 				helpers.Log(r).WithError(err).Info("auth failed, no staff to user")
 				ape.Render(w, problems.Forbidden())
