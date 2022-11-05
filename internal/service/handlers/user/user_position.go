@@ -1,6 +1,7 @@
 package user
 
 import (
+	"errors"
 	"github.com/Digital-Voting-Team/staff-service/internal/data"
 	"github.com/Digital-Voting-Team/staff-service/internal/service/helpers"
 	requests "github.com/Digital-Voting-Team/staff-service/internal/service/requests/user"
@@ -13,11 +14,17 @@ import (
 
 func GetPositionByUser(r *http.Request, userId int64) (*data.Position, error) {
 	resultStaff, err := helpers.StaffQ(r).FilterByUserID(userId).Get()
-	if err != nil {
+	if err != nil || resultStaff == nil {
+		if resultStaff == nil {
+			err = errors.New("resultStaff == nil")
+		}
 		return nil, err
 	}
 	resultPosition, err := helpers.PositionsQ(r).FilterByID(resultStaff.PositionID).Get()
-	if err != nil {
+	if err != nil || resultPosition == nil {
+		if resultStaff == nil {
+			err = errors.New("resultPosition == nil")
+		}
 		return nil, err
 	}
 	return resultPosition, nil
