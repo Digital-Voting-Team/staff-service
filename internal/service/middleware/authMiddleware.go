@@ -36,7 +36,7 @@ func BasicAuth(endpointsConf *config.EndpointsConfig) func(next http.Handler) ht
 				return
 			}
 			if err != nil || position.ID == 0 {
-				helpers.Log(r).WithError(err).Info("auth failed, no staff to user")
+				helpers.Log(r).Info("auth failed, no staff to user")
 				ape.Render(w, problems.Forbidden())
 				return
 			}
