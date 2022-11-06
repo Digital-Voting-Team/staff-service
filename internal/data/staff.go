@@ -22,13 +22,17 @@ type StaffQ interface {
 	Page(pageParams pgdb.OffsetPageParams) StaffQ
 
 	FilterByID(ids ...int64) StaffQ
-	FilterByUserID(ids ...int64) StaffQ
+
 	FilterByWorkStart(time time.Time) StaffQ
 	FilterByWorkEnd(time time.Time) StaffQ
 	FilterBySalaryUp(salaries ...float32) StaffQ
 	FilterBySalaryBottom(salaries ...float32) StaffQ
-	FilterByPosition(ids ...int64) StaffQ
+
+	FilterByStatus(statuses ...resources.WorkerStatus) StaffQ
+
 	FilterByCafe(ids ...int64) StaffQ
+	FilterByPosition(ids ...int64) StaffQ
+	FilterByUserID(ids ...int64) StaffQ
 
 	JoinPerson() StaffQ
 	JoinPosition() StaffQ

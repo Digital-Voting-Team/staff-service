@@ -65,7 +65,7 @@ ALTER TABLE IF EXISTS public.position
 
 INSERT INTO public.position(
     name, access_level)
-VALUES ('manager', 5);
+VALUES ('Admin', 5);
 
 -- Table: public.staff
 
@@ -97,13 +97,7 @@ ALTER TABLE IF EXISTS public.staff
 
 INSERT INTO public.staff(
     employment_date, salary, status, person_id, cafe_id, position_id, user_id)
-VALUES ('1996-12-02', 100, 'BUSY', 1, 1, 1, 1);
-
-
-SELECT * FROM public.address;
-SELECT * FROM public.person;
-SELECT * FROM public.position;
-SELECT * FROM public.staff;
+VALUES ('1996-12-02', 1001, 'BUSY', 1, 1, 1, 1);
 
 -- +migrate Down
 DROP TABLE IF EXISTS public.staff;

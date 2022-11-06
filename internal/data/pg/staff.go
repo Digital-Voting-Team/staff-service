@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/Digital-Voting-Team/staff-service/internal/data"
+	"github.com/Digital-Voting-Team/staff-service/resources"
 	sq "github.com/Masterminds/squirrel"
 	"github.com/fatih/structs"
 	"gitlab.com/distributed_lab/kit/pgdb"
@@ -110,16 +111,12 @@ func (s *staffQ) FilterByUserID(ids ...int64) data.StaffQ {
 func (s *staffQ) FilterByWorkStart(time time.Time) data.StaffQ {
 	stmt := sq.GtOrEq{"staff.employment_date": time}
 	s.sql = s.sql.Where(stmt)
-	// Will not work for update
-	// s.sqlUpdate = s.sqlUpdate.Where(stmt)
 	return s
 }
 
 func (s *staffQ) FilterByWorkEnd(time time.Time) data.StaffQ {
 	stmt := sq.LtOrEq{"staff.employment_date": time}
 	s.sql = s.sql.Where(stmt)
-	// Will not work for update
-	// s.sqlUpdate = s.sqlUpdate.Where(stmt)
 	return s
 }
 
@@ -132,6 +129,11 @@ func (s *staffQ) FilterBySalaryUp(salaries ...float32) data.StaffQ {
 func (s *staffQ) FilterBySalaryBottom(salaries ...float32) data.StaffQ {
 	stmt := sq.GtOrEq{"staff.salary": salaries}
 	s.sql = s.sql.Where(stmt)
+	return s
+}
+
+func (s *staffQ) FilterByStatus(statuses ...resources.WorkerStatus) data.StaffQ {
+	s.sql = s.sql.Where(sq.Eq{"staff.status": statuses})
 	return s
 }
 

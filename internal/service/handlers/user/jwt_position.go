@@ -15,7 +15,7 @@ func GetPositionByJWT(endpointsConf *config.EndpointsConfig) func(w http.Respons
 	return func(w http.ResponseWriter, r *http.Request) {
 		jwtResponse, err := endpoints2.ValidateToken(
 			r.Header.Get("Authorization"),
-			endpointsConf.Endpoints["auth_service"],
+			endpointsConf.Endpoints["auth-service"],
 		)
 		if err != nil || jwtResponse.Data.ID == "" {
 			helpers.Log(r).WithError(err).Info("auth failed")
