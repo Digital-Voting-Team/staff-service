@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS public.staff
     employment_date date,
     salary double precision,
     status text,
-    person_id integer,
+    person_id integer UNIQUE,
     cafe_id integer,
     position_id integer,
     user_id integer UNIQUE,

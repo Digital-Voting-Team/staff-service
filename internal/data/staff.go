@@ -33,6 +33,7 @@ type StaffQ interface {
 	FilterByCafe(ids ...int64) StaffQ
 	FilterByPosition(ids ...int64) StaffQ
 	FilterByUserID(ids ...int64) StaffQ
+	FilterByPersonID(ids ...int64) StaffQ
 
 	JoinPerson() StaffQ
 	JoinPosition() StaffQ

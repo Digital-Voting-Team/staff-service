@@ -38,8 +38,15 @@ func CreateStaff(w http.ResponseWriter, r *http.Request) {
 		UserId:         cast.ToInt64(request.Data.Relationships.User.Data.ID),
 	}
 
+	resultStaffByPerson, err := helpers.StaffQ(r).FilterByPersonID(staff.PersonID).Get()
+	if resultStaffByPerson != nil {
+		helpers.Log(r).WithError(err).Error("person already related to staff")
+		ape.RenderErr(w, problems.Conflict())
+		return
+	}
+
 	relatePerson, err := helpers.PersonsQ(r).FilterByID(staff.PersonID).Get()
-	if err != nil {
+	if err != nil || relatePerson == nil {
 		helpers.Log(r).WithError(err).Error("failed to get person")
 		ape.RenderErr(w, problems.NotFound())
 		return
