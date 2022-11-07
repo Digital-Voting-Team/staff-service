@@ -55,7 +55,6 @@ func (s *service) router() chi.Router {
 			r.Post("/", position.CreatePosition)
 			r.Get("/", position.GetPositionList)
 			r.Get("/user", user.GetPositionByUserHandler)
-			r.Get("/jwt/user", user.GetPositionByJWT(s.endpoints))
 			r.Route("/{id}", func(r chi.Router) {
 				r.Get("/", position.GetPosition)
 				r.Put("/", position.UpdatePosition)
@@ -71,6 +70,9 @@ func (s *service) router() chi.Router {
 				r.Delete("/", staff.DeleteStaff)
 			})
 		})
+	})
+	r.Route("/", func(r chi.Router) {
+		r.Get("/jwt/user", user.GetPositionByJWT(s.endpoints))
 	})
 
 	return r
