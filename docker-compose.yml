@@ -7,14 +7,14 @@ services:
     ports:
       - "9102:9102"
     depends_on:
-      - staff_db
+      - staff-db
     environment:
       - KV_VIPER_FILE=/config.yaml
     volumes:
       - ./config.yaml:/config.yaml
     entrypoint: sh -c "staff-service migrate up && staff-service run service"
 
-  staff_db:
+  staff-db:
     image: postgres
     restart: always
     expose:
@@ -32,7 +32,7 @@ services:
     image: postgres
     restart: always
     ports:
-      - "5432:5432"
+      - "5434:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres

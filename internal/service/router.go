@@ -31,6 +31,7 @@ func (s *service) router() chi.Router {
 			helpers.CtxStaffQ(pg.NewStaffQ(s.db)),
 		),
 	)
+
 	r.Route("/integrations/staff-service", func(r chi.Router) {
 		r.Use(middleware.BasicAuth(s.endpoints))
 		r.Route("/addresses", func(r chi.Router) {
