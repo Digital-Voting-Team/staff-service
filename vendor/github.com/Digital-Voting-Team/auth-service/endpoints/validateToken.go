@@ -2,7 +2,7 @@ package endpoints
 
 import (
 	"encoding/json"
-	"github.com/Digital-Voting-Team/auth-serivce/resources"
+	"github.com/Digital-Voting-Team/auth-service/resources"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"net/http"
 )

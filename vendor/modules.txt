@@ -1,7 +1,7 @@
-# github.com/Digital-Voting-Team/auth-serivce v1.2.2
+# github.com/Digital-Voting-Team/auth-service v1.2.4
 ## explicit; go 1.19
-github.com/Digital-Voting-Team/auth-serivce/endpoints
-github.com/Digital-Voting-Team/auth-serivce/resources
+github.com/Digital-Voting-Team/auth-service/endpoints
+github.com/Digital-Voting-Team/auth-service/resources
 # github.com/Masterminds/squirrel v1.5.3
 ## explicit; go 1.14
 github.com/Masterminds/squirrel
@@ -57,12 +57,16 @@ github.com/getsentry/sentry-go/internal/ratelimit
 ## explicit
 github.com/go-chi/chi
 github.com/go-chi/chi/middleware
+# github.com/go-chi/cors v1.2.1
+## explicit; go 1.14
 # github.com/go-gorp/gorp/v3 v3.1.0
 ## explicit; go 1.18
 github.com/go-gorp/gorp/v3
 # github.com/go-ozzo/ozzo-validation/v4 v4.3.0
 ## explicit; go 1.13
 github.com/go-ozzo/ozzo-validation/v4
+# github.com/golang-jwt/jwt v3.2.2+incompatible
+## explicit
 # github.com/google/jsonapi v1.0.0
 ## explicit
 github.com/google/jsonapi
